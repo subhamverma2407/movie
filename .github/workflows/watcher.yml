@@ -1,0 +1,39 @@
+name: Website Watcher
+
+on:
+  schedule:
+    - cron: "*/30 * * * *" # every 30 minutes
+  workflow_dispatch:
+
+jobs:
+  check-site:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
+      - name: Check date range
+        run: |
+          TODAY=$(date +%Y-%m-%d)
+          START="2026-03-7"
+          END="2026-03-18"
+
+          if [[ "$TODAY" < "$START" || "$TODAY" > "$END" ]]; then
+            echo "Outside allowed date range"
+            exit 0
+          fi
+
+      - name: Run watcher
+        run: node check.js
