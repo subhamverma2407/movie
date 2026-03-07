@@ -39,7 +39,7 @@ async function checkWebsite() {
       console.log("Element found!");
 
       await sendTelegramNotification(
-        `🚨 Element Found!\n\naria-label="abc" detected on:\n${URL}`,
+        `🚨 Element Found!\n\naria-label=" 18 March" detected on:\n${URL}`,
       );
     } else {
       console.log("Element not found");
