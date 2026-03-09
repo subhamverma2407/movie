@@ -18,7 +18,7 @@ async function checkWebsite() {
 
     const html = await response.text();
 
-    const hasDate = html.includes('aria-label="Wednesday18"');
+    const hasDate = html.includes('aria-label="Thursday19"');
 
     const preferredTheatres = [
       "Cinepolis Nexus Shantiniketan",
