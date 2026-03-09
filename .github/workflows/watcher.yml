@@ -8,6 +8,8 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
+    env:
+      NODE_OPTIONS: "--dns-result-order=ipv4first"
 
     steps:
       - uses: actions/checkout@v4

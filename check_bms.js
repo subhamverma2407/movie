@@ -1,3 +1,5 @@
+const { sendTelegram } = require("./notify");
+
 const URL =
   "https://www.district.in/movies/dhurandhar-the-revenge-movie-tickets-in-bengaluru-MV211577?frmtid=v833gyzof7";
 
@@ -18,7 +20,7 @@ async function checkWebsite() {
 
     const html = await response.text();
 
-    const hasDate = html.includes('aria-label="Thursday19"');
+    const hasDate = html.includes('aria-label="Wednesday18"');
 
     const preferredTheatres = [
       "Cinepolis Nexus Shantiniketan",
@@ -33,7 +35,7 @@ async function checkWebsite() {
 
       const message = `🚨 Slot detected for 19 March`;
 
-      await sendNtfy(message);
+      await Promise.allSettled([sendNtfy(message), sendTelegram(message)]);
     } else {
       console.log("Element not found");
     }
