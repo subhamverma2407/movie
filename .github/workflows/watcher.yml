@@ -14,5 +14,8 @@ jobs:
 
       - uses: actions/setup-node@v4
 
-      - run: node --no-warnings check.js
-      - run: node --no-warnings check_bms.js
+      - name: Run checks in parallel
+        run: |
+          node --no-warnings check.js &
+          node --no-warnings check_bms.js &
+          wait
