@@ -20,7 +20,8 @@ async function checkWebsite() {
 
     const html = await response.text();
 
-    const hasDate = html.includes('aria-label="Wednesday18"');
+    // const hasDate = html.includes('aria-label="Wednesday18"');
+    const hasDate = html.includes('aria-label="Thursday19"');
 
     const preferredTheatres = [
       "Cinepolis Nexus Shantiniketan",
@@ -33,9 +34,12 @@ async function checkWebsite() {
     if (hasDate && hasPreferredTheatre) {
       console.log("Element found!");
 
-      const message = `🚨 Slot detected for 19 March`;
+      const message = `🚨 Slot detected for Dhurandhar: The Revenge on 19 March`;
 
-      await Promise.allSettled([sendNtfy(message), sendTelegram(message)]);
+      await Promise.allSettled([
+        sendNtfy(message),
+        sendTelegram(`DISTRICT: ${message}`),
+      ]);
     } else {
       console.log("Element not found");
     }
