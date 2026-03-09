@@ -16,4 +16,9 @@ jobs:
         with:
           node-version: 18
 
-      - run: node --no-warnings check.js
+      - run: npm install
+
+      - run: node check.js
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
