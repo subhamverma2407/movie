@@ -17,3 +17,4 @@ jobs:
           node-version: 18
 
       - run: node --no-warnings check.js
+      - run: node --no-warnings check_bms.js
