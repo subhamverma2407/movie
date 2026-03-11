@@ -1,6 +1,18 @@
 const { chromium } = require("playwright");
 const { sendTelegram } = require("./notify");
 
+try {
+  const { readFileSync } = require("fs");
+  const content = readFileSync(`${__dirname}/.env`, "utf8");
+  for (const line of content.split("\n")) {
+    const eq = line.indexOf("=");
+    if (eq === -1) continue;
+    const k = line.slice(0, eq).trim();
+    const v = line.slice(eq + 1).trim();
+    if (k && !process.env[k]) process.env[k] = v;
+  }
+} catch (_) {}
+
 const URL =
   "https://www.district.in/movies/dhurandhar-the-revenge-movie-tickets-in-bengaluru-MV211577?frmtid=v833gyzof7";
 
@@ -134,12 +146,10 @@ async function check(page) {
   }, preferredTheatres);
 
   if (foundTheatre.length > 0) {
+    const isLocal = !!process.env.isLocal;
     const message = `
-AUTOMATION: SLOT DETECTED AT ${foundTheatre} ON 19th March
+${isLocal ? "LOCAL SERVER" : "GITHUB ACTION"}: SLOT DETECTED AT ${foundTheatre} ON 19th March
 `;
-
-    console.log(message);
-
     await Promise.allSettled([sendNtfy(message), sendTelegram(message)]);
   } else {
     console.log("No preferred theatres yet");
