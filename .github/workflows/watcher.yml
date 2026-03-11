@@ -2,7 +2,7 @@ name: Movie Watcher
 
 on:
   schedule:
-    - cron: "*/30 * * * *"
+    - cron: "*/10 * 11-19 3 *"
   workflow_dispatch:
 
 jobs:
@@ -12,6 +12,8 @@ jobs:
 
     env:
       NODE_OPTIONS: "--dns-result-order=ipv4first"
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
 
     steps:
       - name: Checkout repo

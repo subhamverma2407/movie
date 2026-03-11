@@ -1,7 +1,7 @@
 const { sendTelegram } = require("./notify");
 
 const URL =
-  "https://www.district.in/movies/cinepolis-nexus-shantiniketan-thigalarapalya-bengaluru-in-bengaluru-CD7508?fromdate=2026-03-18";
+  "https://www.district.in/movies/cinepolis-nexus-shantiniketan-thigalarapalya-bengaluru-in-bengaluru-CD7508?fromdate=2026-03-19";
 // "https://www.district.in/movies/cinepolis-nexus-shantiniketan-thigalarapalya-bengaluru-in-bengaluru-CD7508?fromdate=2026-03-11";
 
 async function sendNtfy(message) {
@@ -37,12 +37,9 @@ async function checkWebsite() {
     if (hasDate) {
       console.log("Show found!");
 
-      const message = `🚨 18th IMAX Cinepolis - Slot detected for Dhurandhar: The Revenge on 18th March`;
+      const message = `🚨LOCAL SERVER: 19th IMAX Cinepolis - Slot detected for Dhurandhar: The Revenge on 19th March`;
 
-      await Promise.allSettled([
-        sendNtfy(message),
-        sendTelegram(`DISTRICT: ${message}`),
-      ]);
+      await Promise.allSettled([sendNtfy(message), sendTelegram(message)]);
     } else {
       console.log("Element not found");
     }

@@ -10,6 +10,7 @@ const preferredTheatres = [
   "PVR VR",
   "Grand cinemas",
   "PVR Vega City",
+  "PVR Nexus (Formerly Forum)",
 ];
 
 // Send ntfy notification
