@@ -22,19 +22,22 @@ async function checkWebsite() {
     const html = await response.text();
 
     const regex = /<span[^>]*>[^<]*IMAX[^<]*<\/span>/i;
+    const regexAtmos = /<span[^>]*>[^<]*ATMOS[^<]*<\/span>/i;
 
     // const hasDate = html.includes('aria-label="Wednesday18"');
     const hasDate =
       html.includes(
         '<span class="MovieSessionsListing_timeblock__frmt___XgZL_D">IMAX</span>',
-      ) || regex.test(html);
+      ) ||
+      regex.test(html) ||
+      regexAtmos.test(html);
 
     // const hasPreferredTheatre = preferredTheatres.some((t) => html.includes(t));
 
     if (hasDate) {
       console.log("Show found!");
 
-      const message = `🚨18th IMAX Cinepolis - Slot detected for Dhurandhar: The Revenge on 18th March`;
+      const message = `🚨 18th IMAX Cinepolis - Slot detected for Dhurandhar: The Revenge on 18th March`;
 
       await Promise.allSettled([
         sendNtfy(message),
