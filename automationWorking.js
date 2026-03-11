@@ -20,7 +20,7 @@ const URL =
 const preferredTheatres = [
   "Cinepolis Nexus Shantiniketan",
   "PVR VR",
-  "Grand cinemas",
+  // "Grand cinemas",
   "PVR Vega City",
   "PVR Nexus (Formerly Forum)",
 ];
@@ -147,8 +147,9 @@ async function check(page) {
 
   if (foundTheatre.length > 0) {
     const isLocal = !!process.env.isLocal;
+    const isUbuntuServer = !!process.env.isUbuntuServer;
     const message = `
-${isLocal ? "LOCAL SERVER" : "GITHUB ACTION"}: SLOT DETECTED AT ${foundTheatre} ON 19th March
+${isLocal ? "LOCAL SERVER" : isUbuntuServer ? "UBUNTU SERVER" : "GITHUB ACTION"}: SLOT DETECTED AT ${foundTheatre} ON 19th March
 `;
     await Promise.allSettled([sendNtfy(message), sendTelegram(message)]);
   } else {
