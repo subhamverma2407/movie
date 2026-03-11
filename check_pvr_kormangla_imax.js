@@ -12,13 +12,13 @@ try {
 } catch (_) {}
 
 const URL =
-  "https://www.district.in/movies/cinepolis-nexus-shantiniketan-thigalarapalya-bengaluru-in-bengaluru-CD7508?fromdate=2026-03-19";
+  "https://www.district.in/movies/pvr-nexus-formerly-forum-koramangala-bengaluru-in-bengaluru-CD1022297?fromdate=2026-03-19";
 // "https://www.district.in/movies/cinepolis-nexus-shantiniketan-thigalarapalya-bengaluru-in-bengaluru-CD7508?fromdate=2026-03-11";
 
 async function sendNtfy(message) {
   await fetch("https://ntfy.sh/movie-slot-alert", {
     method: "POST",
-    body: "DISTRICT:" + message,
+    body: message,
   });
 
   console.log("ntfy notification sent");
@@ -33,15 +33,12 @@ async function checkWebsite() {
     const html = await response.text();
 
     const regex = /<span[^>]*>[^<]*IMAX[^<]*<\/span>/i;
-    const regexAtmos = /<span[^>]*>[^<]*ATMOS[^<]*<\/span>/i;
 
     // const hasDate = html.includes('aria-label="Wednesday18"');
     const hasDate =
       html.includes(
         '<span class="MovieSessionsListing_timeblock__frmt___XgZL_D">IMAX</span>',
-      ) ||
-      regex.test(html) ||
-      regexAtmos.test(html);
+      ) || regex.test(html);
 
     // const hasPreferredTheatre = preferredTheatres.some((t) => html.includes(t));
 

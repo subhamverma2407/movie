@@ -34,4 +34,8 @@ jobs:
       - name: Run checks in parallel
         run: |
           node --no-warnings automationWorking.js &
+          node --no-warnings check_pvr_vr_imax.js &
+          node --no-warnings check_pvr_vega_imax.js &
+          node --no-warnings check_pvr_kormangla_imax.js &
+          node --no-warnings check_cinepolis_imax.js &
           wait
