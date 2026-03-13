@@ -18,15 +18,13 @@ async function checkAndCallReminder() {
     istTime.getDate(),
   );
 
-  console.log(hours);
-
   const isValidDate = today >= startDate && today <= endDate;
   const isBlockedTime = hours >= 3 && hours < 10;
 
   if (isValidDate && !isBlockedTime) {
     await reminderNotification("Check if booking has opened!");
   } else {
-    console.log("Conditions not satisfied. API not called.");
+    return;
   }
 }
 
