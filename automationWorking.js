@@ -128,6 +128,8 @@ async function check(page) {
     console.log("Thursday19 link not found or theatre list did not appear");
   }
 
+  await page.waitForTimeout(2000);
+
   // 6️⃣ Check for preferred theatres
   const foundTheatre = await page.evaluate((preferredTheatres) => {
     const theatreElements = Array.from(
@@ -161,6 +163,7 @@ ${isLocal ? "LOCAL SERVER" : isUbuntuServer ? "UBUNTU SERVER" : "GITHUB ACTION"}
 async function start() {
   const browser = await chromium.launch({
     headless: true,
+    // slowMo: 100,
   });
 
   const context = await browser.newContext({
@@ -181,7 +184,6 @@ async function start() {
   } catch (err) {
     console.error("Error during check:", err);
   }
-
   await browser.close();
 }
 
