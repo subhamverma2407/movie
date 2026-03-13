@@ -32,17 +32,20 @@ async function checkWebsite() {
 
     const html = await response.text();
 
-    const regex = /<span[^>]*>[^<]*IMAX[^<]*<\/span>/i;
+    const regexImax = /<span[^>]*>[^<]*IMAX[^<]*<\/span>/i;
     const regexAtmos = /<span[^>]*>[^<]*ATMOS[^<]*<\/span>/i;
+    const regexDolby = /<span[^>]*>[^<]*DOLBY 7.1[^<]*<\/span>/i;
 
-    // const hasDate = html.includes('aria-label="Wednesday18"');
-    const hasDate =
+    const isImax =
+      regexImax.test(html) ||
       html.includes(
         '<span class="MovieSessionsListing_timeblock__frmt___XgZL_D">IMAX</span>',
-      ) ||
-      regex.test(html) ||
-      regexAtmos.test(html);
+      );
+    const isAtmos = regexAtmos.test(html);
+    const isDolby = regexDolby.test(html);
 
+    // const hasDate = html.includes('aria-label="Wednesday18"');
+    const hasDate = isImax || isAtmos || isDolby;
     // const hasPreferredTheatre = preferredTheatres.some((t) => html.includes(t));
 
     if (hasDate) {
@@ -51,7 +54,7 @@ async function checkWebsite() {
       const isLocal = !!process.env.isLocal;
       const isUbuntuServer = !!process.env.isUbuntuServer;
       const message = `
-  ${isLocal ? "LOCAL SERVER" : isUbuntuServer ? "UBUNTU SERVER" : "GITHUB ACTION"}: IMAX PVR NEXUS Kormangla - Slot detected for Dhurandhar: The Revenge on 19th March`;
+  ${isLocal ? "LOCAL SERVER" : isUbuntuServer ? "UBUNTU SERVER" : "GITHUB ACTION"}: Cinepolis shantiniketan(${isImax ? "IMAX" : ""},${isDolby ? "DOLBY" : ""}, ${isAtmos ? "ATMOS" : ""}) - Slot detected for Dhurandhar: The Revenge on 19th March`;
 
       await Promise.allSettled([sendNtfy(message), sendTelegram(message)]);
     } else {
