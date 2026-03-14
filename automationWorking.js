@@ -19,7 +19,6 @@ const URL =
 // Preferred theatres
 const preferredTheatres = [
   // "Cinepolis Nexus Shantiniketan",
-  "PVR VR",
   // "Grand cinemas",
   "PVR Vega City",
   // "PVR Nexus (Formerly Forum)",
