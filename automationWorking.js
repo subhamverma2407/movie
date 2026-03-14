@@ -18,11 +18,11 @@ const URL =
 
 // Preferred theatres
 const preferredTheatres = [
-  "Cinepolis Nexus Shantiniketan",
+  // "Cinepolis Nexus Shantiniketan",
   "PVR VR",
   // "Grand cinemas",
   "PVR Vega City",
-  "PVR Nexus (Formerly Forum)",
+  // "PVR Nexus (Formerly Forum)",
 ];
 
 // Send ntfy notification
