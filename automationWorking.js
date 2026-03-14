@@ -20,7 +20,7 @@ const URL =
 const preferredTheatres = [
   // "Cinepolis Nexus Shantiniketan",
   // "Grand cinemas",
-  "PVR Vega City",
+  // "PVR Vega City",
   // "PVR Nexus (Formerly Forum)",
 ];
 
@@ -186,4 +186,4 @@ async function start() {
   await browser.close();
 }
 
-start();
+// start();
