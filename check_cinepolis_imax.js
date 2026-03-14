@@ -41,8 +41,8 @@ async function checkWebsite() {
       html.includes(
         '<span class="MovieSessionsListing_timeblock__frmt___XgZL_D">IMAX</span>',
       );
-    const isAtmos = regexAtmos.test(html);
-    const isDolby = regexDolby.test(html);
+    const isAtmos = false && regexAtmos.test(html);
+    const isDolby = false && regexDolby.test(html);
 
     // const hasDate = html.includes('aria-label="Wednesday18"');
     const hasDate = isImax || isAtmos || isDolby;

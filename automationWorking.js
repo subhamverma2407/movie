@@ -162,7 +162,7 @@ ${isLocal ? "LOCAL SERVER" : isUbuntuServer ? "UBUNTU SERVER" : "GITHUB ACTION"}
 // Main function
 async function start() {
   const browser = await chromium.launch({
-    headless: true,
+    headless: false,
     // slowMo: 100,
   });
 
@@ -184,6 +184,8 @@ async function start() {
   } catch (err) {
     console.error("Error during check:", err);
   }
+  await page.waitForTimeout(30000);
+
   await browser.close();
 }
 
